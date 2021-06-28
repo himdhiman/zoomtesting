@@ -170,8 +170,6 @@ def start_meeting(request, id):
             'content-type' : 'application/json',
             "Authorization": f"Bearer {access_token}"
         }, data=json.dumps(payload))
-    print(data.text)
-    print(data.json())
     return HttpResponseRedirect(batch_obj.start_url)
 
 def end_meeting(request):
