@@ -172,6 +172,10 @@ def start_meeting(request, id):
     print(data.json())
     return HttpResponseRedirect(batch_obj.start_url)
 
+def end_meeting(request):
+    print(request.POST)
+    return
+
 
 # def modify_time(time):
 #     time = time.split(":")

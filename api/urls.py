@@ -10,6 +10,7 @@ urlpatterns = [
     path("createbatch/", views.create_batch, name='createbatch'),
     path("getbatch/", views.get_batch, name='getbatch'),
     path("callback/", views.zoom_callback),
+    path("endmeeting/", views.end_meeting),
     path("startmeet/<int:id>/", views.start_meeting, name="startmeet"),
     path("temp_zoom/", views.created_licence)
 ]
