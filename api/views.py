@@ -177,7 +177,7 @@ def end_meeting(request):
     if(request.method == "POST"):
         print("Hello Himanshu")
         print(request.headers)
-        print(request.data)
+        print(request.POST)
         return HttpResponse(status=200)
     return
 
