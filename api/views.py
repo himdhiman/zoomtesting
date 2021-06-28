@@ -174,6 +174,7 @@ def start_meeting(request, id):
 
 def end_meeting(request):
     if(request.method == "POST"):
+        print(request.headers)
         print(request.POST)
         return HttpResponse(status=200)
     return
