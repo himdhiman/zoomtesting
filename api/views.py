@@ -47,6 +47,7 @@ def zoom_callback(request):
     data = requests.post(post_url, headers={
         "Authorization" : "Basic" + encode_base64(l_obj.client_id + ":" + l_obj.client_secret)
     })
+    print(data.json())
     setattr(l_obj, "refresh_token", data.json()["refresh_token"])
     l_obj.save()
     return HttpResponseRedirect("/temp_zoom/")
