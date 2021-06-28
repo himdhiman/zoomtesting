@@ -1,0 +1,50 @@
+.heading {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  div {
+    margin: 2rem auto;
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 30vw;
+  flex-direction: row;
+}
+
+.textinput {
+  margin: 2rem auto;
+}
+
+.dateInput {
+  margin: 2rem auto;
+}
+
+.startInput {
+  margin: 2rem auto;
+}
+
+.endInput {
+  margin: 2rem auto;
+}
+
+.teacherinput {
+  margin: 2rem auto;
+}
+
+.subjectinput {
+  margin: 2rem auto;
+}

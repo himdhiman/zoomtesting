@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Batches</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
+  </head>
+  <script src="{% static '/js/index.js' %}" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1 class="heading">Batches</h1>
+    {% for each_model in qs %}
+    <div class=outerdiv>
+        <h2>{{each_model.subject.name}}</h2>
+        <h3>{{each_model.teacher.first_name}} {{each_model.teacher.last_name}} </h3>
+        <button><a href="http://localhost:8000/startmeet/{{each_model.id}}" style="text-decoration: none; color: black;">Start Meeting</a></button>
+    </div>
+    {% endfor %}
+  </body>
+</html>

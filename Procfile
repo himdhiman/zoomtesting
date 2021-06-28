@@ -1,0 +1,1 @@
+web: gunicorn zoomIntegration.wsgi --log-file -

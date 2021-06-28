@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Course</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
+  </head>
+  <script src="{% static '/js/index.js' %}" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1 class="heading">Create Batch</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="teacherinput">
+          <label for="Teacher">Teacher Email :</label>
+          <select name="Teacher" id="Teacher">
+            {% for each_model in qs_teacher %}
+            <option value="{{each_model.mail}}">{{each_model.mail}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="dateInput">
+        <label for="startdate">Start Date:</label>
+        <input type="date" id="startdate" name="startdate" />
+      </div>
+      <div class="dateInput">
+        <label for="enddate">End Date:</label>
+        <input type="date" id="enddate" name="enddate" />
+      </div>
+      <div>
+        <div class="startInput">
+          <label for="Sunday">Sunday:</label>
+          <input type="checkbox" id="Sunday" name="Sunday" />
+          <label for="startTimeSunday">Start Time Sunday :</label>
+          <input type="time" id="startTimeSunday" name="startTimeSunday" />
+        </div>
+        <div class="startInput">
+          <label for="Monday">Monday:</label>
+          <input type="checkbox" id="Monday" name="Monday" />
+            <label for="startTimeMonday">Start Time Monday :</label>
+            <input type="time" id="startTimeMonday" name="startTimeMonday" />
+        </div>
+        <div class="startInput">
+          <label for="Tuesday">Tuesday:</label>
+          <input type="checkbox" id="Tuesday" name="Tuesday" />
+            <label for="startTimeTuesday">Start Time Tuesday :</label>
+            <input type="time" id="startTimeTuesday" name="startTimeTuesday" />
+        </div>
+        <div class="startInput">
+          <label for="Wednesday">Wednesday:</label>
+          <input type="checkbox" id="Wednesday" name="Wednesday" />
+            <label for="startTimeWednesday">Start Time Wednesday :</label>
+            <input type="time" id="startTimeWednesday" name="startTimeWednesday" />
+        </div>
+        <div class="startInput">
+          <label for="Thursday">Thursday:</label>
+          <input type="checkbox" id="Thursday" name="Thursday" />
+            <label for="startTimeThursday">Start Time Thursday :</label>
+            <input type="time" id="startTimeThursday" name="startTimeThursday" />
+        </div>
+        <div class="startInput">
+          <label for="Friday">Friday:</label>
+          <input type="checkbox" id="Friday" name="Friday" />
+            <label for="startTimeFriday">Start Time Friday :</label>
+            <input type="time" id="startTimeFriday" name="startTimeFriday" />
+        </div>
+        <div class="startInput">
+          <label for="Saturday">Saturday:</label>
+          <input type="checkbox" id="Saturday" name="Saturday" />
+            <label for="startTimeSaturday">Start Time Saturday :</label>
+            <input type="time" id="startTimeSaturday" name="startTimeSaturday" />
+        </div>
+        <div class="startInput">
+          <div class="startInput">
+            <label for="duration">Class Duration (in mins) :</label>
+            <input type="number" id="duration" name="duration" />
+          </div>
+        </div>
+      </div>
+      <button type="submit">Create Batch</button>
+    </form>
+  </body>
+</html>

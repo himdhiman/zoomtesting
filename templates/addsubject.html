@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Subject</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
+  </head>
+  <script src="{% static '/js/index.js' %}" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1 class="heading">Add Subject</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="textinput">
+        <label for="subjectname">Subject Name :</label>
+        <input type="text" id="subjectname" name="subjectname" />
+      </div>
+      <button type="submit">Add Subject</button>
+    </form>
+  </body>
+</html>

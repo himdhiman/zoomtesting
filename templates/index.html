@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoom Demo Integration</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/index.css' %}"
+    />
+  </head>
+  <script src="{% static '/js/index.js' %}" type="text/javascript"></script>
+  <body>
+    <div class="heading">
+      <h1>Zoom Demo Application</h1>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="teacherinput">
+          <label for="teachers">Teacher Name:</label>
+          <select name="teachers" id="teachers">
+            {% for each_model in qs_teacher %}
+            <option value="{{each_model.name}}">{{each_model.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="subjectinput">
+          <label for="subjects">Subject Name:</label>
+          <select name="subjects" id="subjects">
+            {% for each_model in qs_subject %}
+            <option value="{{each_model.name}}">{{each_model.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="dateInput">
+        <label for="classDate">Class Date:</label>
+        <input type="date" id="classDate" name="classDate" />
+      </div>
+      <div class="startInput">
+        <label for="startTime">Start Time:</label>
+        <input type="time" id="startTime" name="startTime" />
+      </div>
+      <div class="endInput">
+        <label for="endTime">End Time:</label>
+        <input type="time" id="endTime" name="endTime" />
+      </div>
+      <button type="submit">Get Link</button>
+    </form>
+  </body>
+</html>
