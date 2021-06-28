@@ -107,7 +107,9 @@ def create_subject(request):
 
 @csrf_exempt
 def add_subject(request):
-    return HttpResponseRedirect("http://localhost:8000/createsubject/")
+    # return HttpResponseRedirect("http://localhost:8000/createsubject/")
+    return HttpResponseRedirect("https://testserverzoom.herokuapp.com/createsubject/")
+
 
 @csrf_exempt
 def create_batch(request):
