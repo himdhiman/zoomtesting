@@ -42,7 +42,7 @@ def zoom_callback(request):
     code = request.GET["code"]
     l_id = request.GET["state"]
     print(l_id)
-    post_url = f"https://zoom.us/oauth/token?grant_type=authorization_code&code={code}&redirect_uri=http://127.0.0.1:8000/callback/"
+    post_url = f"https://zoom.us/oauth/token?grant_type=authorization_code&code={code}&redirect_uri=https://testserverzoom.herokuapp.com/callback/"
     l_obj = models.Licence.objects.get(id=l_id)
     data = requests.post(post_url, headers={
         "Authorization" : "Basic" + encode_base64(l_obj.client_id + ":" + l_obj.client_secret)
