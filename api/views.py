@@ -1,5 +1,5 @@
 from django.db.models.base import Model
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect, render
 import requests
 import base64
@@ -173,7 +173,9 @@ def start_meeting(request, id):
     return HttpResponseRedirect(batch_obj.start_url)
 
 def end_meeting(request):
-    print(request.POST)
+    if(request.method == "POST"):
+        print(request.POST)
+        return HttpResponse(status=200)
     return
 
 
