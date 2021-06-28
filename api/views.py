@@ -172,6 +172,7 @@ def start_meeting(request, id):
         }, data=json.dumps(payload))
     return HttpResponseRedirect(batch_obj.start_url)
 
+@csrf_exempt
 def end_meeting(request):
     if(request.method == "POST"):
         print("Hello Himanshu")
