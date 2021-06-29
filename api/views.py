@@ -175,10 +175,9 @@ def start_meeting(request, id):
 @csrf_exempt
 def end_meeting(request):
     if(request.method == "POST"):
-        print("Hello Himanshu")
         print(request.headers)
         print(request.POST)
-        return HttpResponse(status=200)
+        return HttpResponse(status=204)
     return
 
 
