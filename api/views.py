@@ -178,7 +178,18 @@ def end_meeting(request):
         print(request.body)
         data = request.body
         data = data.decode("UTF-8")
-        print(data)
+        m_id = data["payload"]["id"]
+        m_obj = models.Batch.objects.get(zoom_meeting_id=m_id)
+        u_id = m_obj.teacher.zoom_user_id
+        payload = {
+            "type": 1
+        }
+        l_obj = models.Licence.objects.all()[0]
+        access_token = get_access_token(l_obj.id)
+        data = requests.patch(f"https://api.zoom.us/v2/users/{u_id}", headers = {
+            'content-type' : 'application/json',
+            "Authorization": f"Bearer {access_token}"
+        }, data=json.dumps(payload))
         return HttpResponse(status=200)
     return
 
