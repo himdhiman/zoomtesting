@@ -177,7 +177,8 @@ def end_meeting(request):
     if(request.method == "POST"):
         print(request.body)
         data = request.body
-        data = data.decode("UTF-8")
+        data = data.decode("utf-8")
+        data = json.loads(data)
         print(data)
         m_id = data["payload"]["id"]
         m_obj = models.Batch.objects.get(zoom_meeting_id=m_id)
