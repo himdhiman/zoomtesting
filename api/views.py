@@ -180,7 +180,7 @@ def end_meeting(request):
         data = data.decode("utf-8")
         data = json.loads(data)
         print(data)
-        m_id = data["payload"]["id"]
+        m_id = data["payload"]["object"]["id"]
         m_obj = models.Batch.objects.get(zoom_meeting_id=m_id)
         u_id = m_obj.teacher.zoom_user_id
         payload = {
