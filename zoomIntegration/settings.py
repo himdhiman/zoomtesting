@@ -1,15 +1,10 @@
 import os
 from pathlib import Path
-from typing import cast
-# from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = config("SECRET_KEY")
 SECRET_KEY = "u%8$l%9p-87_lz!sv%2245y6s1y+q7+l21wbkbuow73@-cmtqr"
 
-
-# DEBUG = config("DEBUG", cast = bool)
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
