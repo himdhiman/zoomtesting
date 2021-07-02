@@ -57,23 +57,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zoomIntegration.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'zoom',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Himanshu',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddnt7tmoqtfc32',
+        'USER': 'cznileraywzvbx',
+        'PASSWORD': 'df6db4b96e7c589b615c94126e1069fb9d95484def1420a9be4932b99e864126',
+        'HOST': 'ec2-54-166-167-192.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
