@@ -5,7 +5,5 @@ admin.site.register([
     models.Licence,
     models.Subject,
     models.Teacher,
-    models.Meeting,
-    models.Date,
     models.Batch,
 ])

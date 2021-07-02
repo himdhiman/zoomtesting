@@ -34,21 +34,6 @@ class Teacher(models.Model):
         return self.first_name + " " +self.last_name + " - " + self.mail
 
 
-class Meeting(models.Model):
-    meeting_date = models.DateField(null=False, blank=False)
-    start_time = models.TimeField(null=False, blank=False)
-    end_time = models.TimeField(null=False, blank=False)
-    cancelled = models.BooleanField(default=False)
-    cancel_reason = models.TextField(null=True, blank=True)
-    start_url = models.TextField(null=False, blank=False)
-    join_url = models.TextField(null=False, blank=False)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    licence = models.ForeignKey(Licence, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.teacher.name + " " + self.start_time.strftime("%H:%M:%S") + " - " + self.end_time.strftime("%H:%M:%S") + " " + self.subject.name
-
 class Batch(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -76,12 +61,3 @@ class Batch(models.Model):
 
     def __str__(self):
         return self.subject.name + " - " + self.teacher.first_name + " - " + self.start_date.strftime('%m/%d/%Y') + " to " + self.end_date.strftime('%m/%d/%Y')
-
-class Date(models.Model):
-    date_encoded = models.DateField(null=False, blank=False)
-    meetings = models.ManyToManyField(Meeting)
-
-    def __str__(self):
-        return self.date_encoded.strftime('%m/%d/%Y')
-
-
