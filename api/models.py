@@ -9,7 +9,7 @@ class Licence(models.Model):
     client_secret = models.TextField(null=False, blank=False, default="NA")
     installation_url = models.TextField(null=False, blank=False, default="NA")
     refresh_token = models.TextField(null=False, blank=False, default="NA")
-    status = models.BooleanField(default=False, null=False, blank=False)
+    count = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
         return self.license_no
