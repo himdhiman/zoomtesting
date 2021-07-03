@@ -3,10 +3,6 @@ from django.db import models
 from django.db.models.base import Model
 from django.contrib.auth.models import AbstractUser 
 
-
-
-
-
 class Licence(models.Model):
     license_no = models.EmailField(null=False, blank=False)
     client_id = models.TextField(null=False, blank=False, default="NA")
@@ -26,50 +22,96 @@ class Subject(models.Model):
         return self.name
 
 
-class Teacher(models.Model):
-    first_name = models.CharField(max_length=50,null=False, blank=False)
-    last_name = models.CharField(max_length=50,null=False, blank=False)
-    mobile = models.TextField(null=False, blank=False)
-    mail = models.EmailField(null=False, blank=False)
-    subjects = models.ManyToManyField(Subject)
-    zoom_user_id = models.TextField(default="NA", null=False, blank=False)
+
+class Category(models.Model):
+    category_name = models.CharField(max_length=224, null=True, blank=True)
+    description = models.TextField(blank=True, null=True)
+    logo = models.ImageField(upload_to='logo', null=True, blank=True)
+    logo_url = models.TextField(blank=True, null=True)
+    enable = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.first_name + " " +self.last_name + " - " + self.mail
+        return self.category_name
+
+
+class SubCategory(models.Model):
+    category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    subcategory_name = models.CharField(max_length=224, null=True, blank=True)
+    enable = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.subcategory_name
+
+
+class Course(models.Model):
+    title = models.TextField(blank=True, null=True)
+    created_by = models.CharField(max_length=100, null=True, blank=True)
+    category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    sub_category_name = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
+    available_date = models.DateTimeField(blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
+    appendix = models.TextField(blank=True, null=True)
+    course_type = models.CharField(max_length=100, null=True, blank=True)
+    course_description = models.TextField(blank=True, null=True)
+    learning_goals = models.TextField(blank=True, null=True)
+    home_work = models.TextField(blank=True, null=True)
+    assginment = models.TextField(blank=True, null=True)
+    parental_guidence = models.TextField(blank=True, null=True)
+    assesstment = models.TextField(blank=True, null=True)
+    sources = models.TextField(blank=True, null=True)
+    course_price = models.IntegerField(blank=True, null=True)
+    # actual_price = models.IntegerField(blank=True, null=True)
+    logo = models.ImageField(upload_to='logo', null=True, blank=True)
+    published_at = models.DateTimeField(auto_now_add=True)
+    max_students = models.IntegerField(blank=True, null=True)
+    min_students = models.IntegerField(blank=True, null=True)
+    min_age = models.IntegerField(blank=True, null=True)
+    max_age = models.IntegerField(blank=True, null=True)
+    number_of_classes_week = models.IntegerField(blank=True, null=True)
+    number_of_week = models.IntegerField(blank=True, null=True)
+    total_classes = models.IntegerField(blank=True, null=True)
+    time_hour = models.CharField(max_length=100, null=True, blank=True)
+    time_minute = models.CharField(max_length=100, null=True, blank=True)
+    outside_work = models.CharField(max_length=224, null=True, blank=True)
+    material = models.BooleanField(default=False)
+    is_online = models.BooleanField(default=False)
+    welcome_post = models.TextField(blank=True, null=True)
+    course_video = models.FileField(upload_to='course_videos', null=True, blank=True)
+    course_video_url = models.TextField(blank=True, null=True)
+    course_logo_url = models.TextField(blank=True, null=True)
+    approved_by_admin = models.BooleanField(default=False)
+    rejected_by_admin = models.BooleanField(default=False)
+    language_of_instruction = models.TextField(blank=True, null=True)
+    refund = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Batch(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    creation_date = models.DateField(null=False, blank=False, default=date.today)
-    start_date = models.DateField(null=False, blank=False)
-    end_date = models.DateField(null=False, blank=False)
-    duration = models.IntegerField(null=False, blank=False)
-    Sunday = models.BooleanField(null=False, blank=False, default=False)
-    Sunday_time = models.TimeField(null=True, blank=True)
-    Monday = models.BooleanField(null=False, blank=False, default=False)
-    Monday_time = models.TimeField(null=True, blank=True)
-    Tuesday = models.BooleanField(null=False, blank=False, default=False)
-    Tuesday_time = models.TimeField(null=True, blank=True)
-    Wednesday = models.BooleanField(null=False, blank=False, default=False)
-    Wednesday_time = models.TimeField(null=True, blank=True)
-    Thursday = models.BooleanField(null=False, blank=False, default=False)
-    Thursday_time = models.TimeField(null=True, blank=True)
-    Friday = models.BooleanField(null=False, blank=False, default=False)
-    Friday_time = models.TimeField(null=True, blank=True)
-    Saturday = models.BooleanField(null=False, blank=False, default=False)
-    Saturday_time = models.TimeField(null=True, blank=True)
-    start_url = models.TextField(null=False, blank=False, default="NA")
-    join_url = models.TextField(null=False, blank=False, default="NA")
-    zoom_meeting_id = models.TextField(null=False, blank=False, default="NA")
+    course_name = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+    created_by = models.CharField(max_length=100, null=True, blank=True)
+    batch_name = models.CharField(max_length=224, null=True, blank=True)
+    batch_description = models.TextField(blank=True, null=True)
+    start_date = models.DateTimeField(blank=True, null=True)
+    end_date = models.DateTimeField(blank=True, null=True)
+    capacity = models.IntegerField(blank=True, null=True)
+    number_of_week = models.IntegerField(blank=True, null=True)
+    timing = models.TextField(blank=True, null=True)
+    online_link = models.TextField(blank=True, null=True)
+    status = models.BooleanField(default=True)
+    room_name = models.CharField(max_length=50, null=True)
+    room_expires = models.DateTimeField(null=True)
+    room_id = models.TextField(null=True)
 
     def __str__(self):
-        return self.subject.name + " - " + self.teacher.first_name + " - " + self.start_date.strftime('%m/%d/%Y') + " to " + self.end_date.strftime('%m/%d/%Y')
+        return self.batch_name
 
 
 
 
-class User(AbstractUser):
+
+class CustomUser(AbstractUser):
     public_name = models.CharField(max_length=100, null=True, blank=True)
     user_type = models.CharField(max_length=100, null=True, blank=True)
     phone_no = models.CharField(max_length=100, null=True, blank=True)
@@ -80,7 +122,7 @@ class User(AbstractUser):
     experience = models.TextField(blank=True, null=True)
     academics = models.TextField(blank=True, null=True)
     teaching_interests = models.TextField(blank=True, null=True)
-    # course_name = models.ManyToManyField(Course, blank=True)
+    course_name = models.ManyToManyField(Course, blank=True)
     batch = models.ManyToManyField(Batch, blank=True)
     facebook_id = models.CharField(max_length=100, blank=True, null=True)
     gmail_id = models.CharField(max_length=100, blank=True, null=True)
