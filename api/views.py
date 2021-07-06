@@ -1,5 +1,5 @@
 from django.db.models.base import Model
-from django.http.response import HttpResponseRedirect, HttpResponse
+from django.http.response import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 import requests
 import base64
@@ -47,7 +47,6 @@ def zoom_callback(request):
     data = requests.post(post_url, headers={
         "Authorization" : "Basic" + encode_base64(l_obj.client_id + ":" + l_obj.client_secret)
     })
-    print(data.json())
     setattr(l_obj, "refresh_token", data.json()["refresh_token"])
     l_obj.save()
     return HttpResponseRedirect("/temp_zoom/")
@@ -164,12 +163,19 @@ def start_meeting(request, id):
     }
     user_id = teacher_obj.zoom_user_id
     l_obj = models.Licence.objects.all()[0]
-    access_token = get_access_token(l_obj.id)
-    data = requests.patch(f"https://api.zoom.us/v2/users/{user_id}", headers = {
-            'content-type' : 'application/json',
-            "Authorization": f"Bearer {access_token}"
-        }, data=json.dumps(payload))
-    return HttpResponseRedirect(batch_obj.start_url)
+    if l_obj.count > 0:
+        l_obj.count -= 1
+        l_obj.save()
+        access_token = get_access_token(l_obj.id)
+        data = requests.patch(f"https://api.zoom.us/v2/users/{user_id}", headers = {
+                'content-type' : 'application/json',
+                "Authorization": f"Bearer {access_token}"
+            }, data=json.dumps(payload))
+        return HttpResponseRedirect(batch_obj.start_url)
+
+    else:
+        return JsonResponse({"error" : "Insufficient Licence"})
+
 
 @csrf_exempt
 def end_meeting(request):
@@ -186,6 +192,8 @@ def end_meeting(request):
             "type": 1
         }
         l_obj = models.Licence.objects.all()[0]
+        l_obj.count += 1
+        l_obj.save()
         access_token = get_access_token(l_obj.id)
         data = requests.patch(f"https://api.zoom.us/v2/users/{u_id}", headers = {
             'content-type' : 'application/json',

@@ -99,6 +99,7 @@ class Batch(models.Model):
     number_of_week = models.IntegerField(blank=True, null=True)
     timing = models.TextField(blank=True, null=True)
     online_link = models.TextField(blank=True, null=True)
+    host_link = models.TextField(blank=True, null=True)
     status = models.BooleanField(default=True)
     room_name = models.CharField(max_length=50, null=True)
     room_expires = models.DateTimeField(null=True)
@@ -148,6 +149,7 @@ class CustomUser(AbstractUser):
     application_status = models.BooleanField(default=False)
     number_verify_status = models.BooleanField(default=False)
     rejected_by_admin = models.BooleanField(default=False)
+    zoom_user_id = models.TextField(blank=True, null=True, default="NA")
 
     def __str__(self):
         return self.username
